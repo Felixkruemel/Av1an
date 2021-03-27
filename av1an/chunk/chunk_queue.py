@@ -244,7 +244,7 @@ def create_select_chunk(project: Project, index: int, src_path: Path,
     frame_end -= 1  # the frame end boundary is actually a frame that should be included in the next chunk
 
     ffmpeg_gen_cmd = [
-        'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-i',
+        'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-hwaccel', 'auto', '-i',
         src_path.as_posix(), '-vf',
         f'select=between(n\\,{frame_start}\\,{frame_end}),setpts=PTS-STARTPTS',
         *project.pix_format, '-color_range', '0', '-f', 'yuv4mpegpipe', '-'
@@ -300,7 +300,7 @@ def create_chunk_from_segment(project: Project, index: int,
     :return: A Chunk
     """
     ffmpeg_gen_cmd = [
-        'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-i',
+        'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-hwaccel', 'auto', '-i',
         file.as_posix(), *project.pix_format, '-color_range', '0', '-f',
         'yuv4mpegpipe', '-'
     ]
