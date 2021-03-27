@@ -576,7 +576,7 @@ class TargetQuality:
         These should not be moved into encoder classes at this point.
         """
         pipe = [
-            'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-i', '-',
+            'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-hwaccel', 'auto', '-i', '-',
             '-vf', f'select=not(mod(n\\,{probing_rate}))', *self.ffmpeg_pipe
         ]
 
