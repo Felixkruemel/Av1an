@@ -17,7 +17,7 @@ def frame_probe_ffmpeg(source: Path):
     :param: source: Path to input file
     """
     cmd = [
-        "ffmpeg", "-hide_banner", "-i",
+        "ffmpeg", "-hide_banner", '-hwaccel', 'auto', "-i",
         source.as_posix(), "-map", "0:v:0", "-f", "null", "-"
     ]
     r = subprocess.run(cmd, stdout=PIPE, stderr=PIPE)
@@ -36,7 +36,7 @@ def get_frametypes(file: Path) -> List:
     frames = []
 
     ff = [
-        "ffmpeg", "-hide_banner", "-i",
+        "ffmpeg", "-hide_banner", '-hwaccel', 'auto', "-i",
         file.as_posix(), "-vf", "showinfo", "-f", "null", "-loglevel", "debug",
         "-"
     ]
@@ -67,7 +67,7 @@ def get_keyframes(file: Path) -> List[int]:
     keyframes = []
 
     ff = [
-        "ffmpeg", "-hide_banner", "-i",
+        "ffmpeg", "-hide_banner", '-hwaccel', 'auto', "-i",
         file.as_posix(), "-vf", r"select=eq(pict_type\,PICT_TYPE_I)", "-f",
         "null", "-loglevel", "debug", "-"
     ]
