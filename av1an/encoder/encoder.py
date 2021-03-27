@@ -38,7 +38,7 @@ class Encoder(ABC):
         :return: an ffmpeg command that will pipe into the encoder
         """
         return [
-            'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-i', '-',
+            'ffmpeg', '-y', '-hide_banner', '-loglevel', 'error', '-hwaccel', 'auto', '-i', '-',
             *a.ffmpeg_pipe
         ]
 
